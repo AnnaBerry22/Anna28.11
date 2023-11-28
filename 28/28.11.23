@@ -1,0 +1,30 @@
+int test_are_outer_lines_zeroes()
+{
+  int result = 0;
+  Matrix_info m = {};
+  alloc_matrix(&m, 10, 20);
+  fill_matrix(&m, 0.);
+  if (!are_outer_lines_zeroes(&m))
+    result = 1;
+
+  set_element(&m, 5, 15, 42.);
+  if (are_outer_lines_zeroes(&m))
+    result = 2;
+
+  realloc_matrix(&m, 20, 10);
+  fill_matrix(&m, 0.);
+  if (!are_outer_lines_zeroes(&m))
+    result = 3;
+
+  set_element(&m, 15, 5, 42.);
+  if (are_outer_lines_zeroes(&m))
+    result = 4;
+
+  realloc_matrix(&m, 15, 15);
+  fill_matrix(&m, 123.);
+  if (!are_outer_lines_zeroes(&m))
+    result = 5;
+
+  free_matrix(&m);
+  return result;
+}
